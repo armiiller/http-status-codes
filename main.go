@@ -49,7 +49,7 @@ func main() {
 		})
 	})
 
-	router.GET("/:code", func(c *gin.Context) {
+	router.Any("/:code", func(c *gin.Context) {
 		code := c.Param("code")
 		code_i, err := strconv.Atoi(code)
 
