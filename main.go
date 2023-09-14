@@ -32,12 +32,17 @@ func main() {
 	}
 
 	router := gin.Default()
+
+	// Get the Real IP of the user behind cloudflare
+	router.RemoteIPHeaders = append(router.RemoteIPHeaders, "CF-Connecting-IP")
+
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.LoadHTMLGlob("templates/*")
 
 	router.StaticFile("/favicon.ico", "./static/favicon.ico")
 	router.StaticFile("/robots.txt", "./static/robots.txt")
+	router.StaticFile("/app.css", "./static/app.css")
 
 	router.GET("/", handlerIndex)
 
@@ -46,7 +51,7 @@ func main() {
 		router.Any("/"+strconv.Itoa(code), middlewareSleep, handlerStatusCode)
 	}
 
-	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	router.Run(":" + port) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func middlewareSleep(c *gin.Context) {
@@ -74,7 +79,7 @@ func handlerIndex(c *gin.Context) {
 
 	html := template.HTML(blackfriday.MarkdownCommon(mdfile))
 
-	c.HTML(http.StatusOK, "index.tmpl", gin.H{
+	c.HTML(http.StatusOK, "index.html", gin.H{
 		"title":   "statuscode.app",
 		"content": html,
 	})

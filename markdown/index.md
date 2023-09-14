@@ -1,9 +1,9 @@
-# HTTP Status Codes
+# HTTP Status Codes 🤠
 A service for generating HTTP codes.
 
 It's useful for testing monitoring services.
 
-Just add the status code you want to the end of the URL, like this [https://statuscode.app/200](https://statuscode.app/200)
+Just add the status code you want to the end of the URL, like this: [https://statuscode.app/200](https://statuscode.app/200)
 
 If you want to delay a response add the query parameter **sleep** and specify the duration in milliseconds (maximum: 5000). Example: [https://statuscode.app/200?sleep=5000](https://statuscode.app/200?sleep=5000)
 
