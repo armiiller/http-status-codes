@@ -45,6 +45,7 @@ func main() {
 	router.StaticFile("/app.css", "./static/app.css")
 
 	router.GET("/", handlerIndex)
+	router.HEAD("/", handler200)
 
 	// Add the status codes
 	for _, code := range SUPPORTED_STATUS_CODES {
@@ -68,6 +69,10 @@ func middlewareSleep(c *gin.Context) {
 	}
 
 	c.Next()
+}
+
+func handler200(c *gin.Context) {
+	c.Status(http.StatusOK)
 }
 
 func handlerIndex(c *gin.Context) {
