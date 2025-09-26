@@ -20,6 +20,3 @@ node_modules/
 
 # Go workspace file
 go.work
-
-# Fly.io files
-fly.toml
